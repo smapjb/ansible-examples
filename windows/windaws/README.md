@@ -17,4 +17,6 @@ win_initial_password: password_goes_here
 Once that is set up simply run
  
 
-```  ansible-playbook -i hosts aws_prov.yml -vvv --ask-vault-pass
+``` 
+ ansible-playbook -i hosts aws_prov.yml -vvv --ask-vault-pass
+```
