@@ -1,0 +1,19 @@
+---
+- name: Playbook to generate a keypair in AWS
+  hosts: localhost
+  connection: local
+  gather_facts: False
+
+  tasks:
+    - name: Create the pcorneli keypair
+      ec2_key:
+        name: pcorneli 
+      register: keypair
+
+    - name: Write private key to a file
+      copy: 
+        dest: files/pcorneli.pem
+        content: "{{ keypair.key.private_key }}"
+        mode: 0600
+      when: keypair.changed
+
