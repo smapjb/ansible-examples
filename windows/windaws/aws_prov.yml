@@ -29,8 +29,8 @@
         image: "{{ win_ami_id }}"
         region: "{{ ec2_region }}"
         instance_tags: "{'ansible_group':'windows_webservers_''{{ tower_user_name }}', 'type':'{{ ec2_instance_type }}', 'group':'{{ ec2_security_group }}', 'Name':'demo_''{{ tower_user_name }}'}"
-        exact_count: "{{ ec2_instance_count }}"
         count_tag: Name
+        exact_count: "{{ ec2_instance_count }}"
         wait: true
         user_data: "{{ lookup('template', 'userdata.txt.j2') }}"
       register: ec2
