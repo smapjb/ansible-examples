@@ -3,7 +3,7 @@ Windaws
 ----------------
 
 This module contains some work in progress playbooks to set up windows 2012R2 servers
-that are ansible ready 
+that are ansible ready. 
 
 You will need to set your AWS environment variables
 AWS_ACCESS_KEY_ID
