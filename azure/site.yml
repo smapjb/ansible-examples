@@ -1,0 +1,17 @@
+---
+- name: This is a playbook for testing out Azure
+  hosts: localhost
+    
+  vars_files:
+    - secret.yml
+  
+
+  tasks:
+  - name: Create a Resource Group
+    azure_rm_resourcegroup:
+      name: PhillyAir
+      location: westeurope
+      client_id: "{{ client_id }}"
+      subscription_id: "{{ subscription_id }}"
+      tenant: "{{ tenant }}"
+      secret: "{{ secret }}"

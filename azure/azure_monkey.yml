@@ -1,0 +1,26 @@
+- local_action:
+    module: azure
+    name: 'pcorneli_vm1'
+    role_size: Small
+    image: '5112500ae3b842c8b9c604889f8753c3__OpenLogic-CentOS-67-20150815'
+    password: 'changeme123'
+    location: 'West Europe'
+    user: centos
+    wait: yes
+    subscription_id: '3f7e29ba-24e0-42f6-8d9c-5149a14bda37'    
+    management_cert_path: '~/.ssh/manage.cer'
+    storage_account: 'pcornelistor'
+    endpoints: '22,8080,80'
+  register: azure_vm
+
+
+- add_host:
+    name: '{{ azure_vm.public_dns_name }}'
+
+- name: wait when instance become ready to use
+  wait_for:
+   host: '{{ azure_vm.public_dns_name }}'
+   port: "22"
+   delay: "60"
+   timeout: "320"
+   state: "started"
