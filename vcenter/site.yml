@@ -22,9 +22,6 @@
          hostname: esxi05.internal.croftvillas.com
     with_items:
       - rhel7_clone
-      - rhel7_clone_II
-      - rhel7_clone_III
-      - rhel7_clone_IV
 
   - name: Gather all registered virtual machines
     local_action:
