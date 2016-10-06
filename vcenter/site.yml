@@ -26,7 +26,7 @@
   - name: Gather all registered virtual machines
     local_action:
       module: vmware_vm_facts
-#      hostname: vcenter6.internal.croftvillas.com
+      hostname: {{ vcenter_hostname }}
 #      username: administrator@internal.croftvillas.com
 #      password: "{{ password }}"
     register: vmware
