@@ -1,0 +1,54 @@
+---
+- name: This playbook is for messing about with VCenter
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars_files:
+    - vars/secret.yml
+
+  tasks:
+  
+  - name: Deploy guest from template
+    vsphere_guest:
+      vcenter_hostname: vcenter6.internal.croftvillas.com
+      username: administrator@internal.croftvillas.com
+      password: "{{ password }}"
+      guest: "{{ item }}"
+      from_template: yes
+      template_src: "rhel7"
+      esxi:
+         datacenter: CroftVillas
+         hostname: esxi05.internal.croftvillas.com
+    with_items:
+      - rhel7_clone
+      - rhel7_clone_II
+      - rhel7_clone_III
+      - rhel7_clone_IV
+
+  - name: Gather all registered virtual machines
+    local_action:
+      module: vmware_vm_facts
+      hostname: vcenter6.internal.croftvillas.com
+      username: administrator@internal.croftvillas.com
+      password: "{{ password }}"
+    register: vmware
+  
+  - debug: var=vmware
+
+  - name: Set hostname on running VMs
+    vmware_vm_shell:
+      hostname: vcenter6.internal.croftvillas.com
+      username: administrator@internal.croftvillas.com
+      password: "{{ password }}"
+      datacenter: CroftVillas
+      vm_id: "{{ item.key }}" 
+      vm_username: root
+      vm_password: "{{ vm_password }}"
+      vm_shell: /usr/bin/nmcli
+      #vm_shell_args: " con up id eno16777736 "
+      #vm_shell_args: " dev disconnect eno16777736 "
+      vm_shell_args: " general hostname {{ item.key }}.internal.croftvillas.com "
+    when: item.value.power_state == "poweredOn"
+    with_dict: "{{ vmware.virtual_machines }}"
+
