@@ -11,9 +11,9 @@
   
   - name: Deploy guest from template
     vsphere_guest:
-      vcenter_hostname: vcenter6.internal.croftvillas.com
-      username: administrator@internal.croftvillas.com
-      password: "{{ password }}"
+#      vcenter_hostname: vcenter6.internal.croftvillas.com
+#      username: administrator@internal.croftvillas.com
+#      password: "{{ password }}"
       guest: "{{ item }}"
       from_template: yes
       template_src: "rhel7"
@@ -26,9 +26,9 @@
   - name: Gather all registered virtual machines
     local_action:
       module: vmware_vm_facts
-      hostname: vcenter6.internal.croftvillas.com
-      username: administrator@internal.croftvillas.com
-      password: "{{ password }}"
+#      hostname: vcenter6.internal.croftvillas.com
+#      username: administrator@internal.croftvillas.com
+#      password: "{{ password }}"
     register: vmware
   
   - debug: var=vmware
