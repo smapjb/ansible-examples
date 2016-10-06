@@ -4,8 +4,8 @@
   connection: local
   gather_facts: false
 
-  vars_files:
-    - vars/secret.yml
+#  vars_files:
+#    - vars/secret.yml
 
   tasks:
   
