@@ -33,19 +33,19 @@
   
   - debug: var=vmware
 
-  - name: Set hostname on running VMs
-    vmware_vm_shell:
-      hostname: vcenter6.internal.croftvillas.com
-      username: administrator@internal.croftvillas.com
-      password: "{{ password }}"
-      datacenter: CroftVillas
-      vm_id: "{{ item.key }}" 
-      vm_username: root
-      vm_password: "{{ vm_password }}"
-      vm_shell: /usr/bin/nmcli
-      #vm_shell_args: " con up id eno16777736 "
-      #vm_shell_args: " dev disconnect eno16777736 "
-      vm_shell_args: " general hostname {{ item.key }}.internal.croftvillas.com "
-    when: item.value.power_state == "poweredOn"
-    with_dict: "{{ vmware.virtual_machines }}"
+#  - name: Set hostname on running VMs
+#    vmware_vm_shell:
+#      hostname: vcenter6.internal.croftvillas.com
+#      username: administrator@internal.croftvillas.com
+#      password: "{{ password }}"
+#      datacenter: CroftVillas
+#      vm_id: "{{ item.key }}" 
+#      vm_username: root
+#      vm_password: "{{ vm_password }}"
+#      vm_shell: /usr/bin/nmcli
+#      #vm_shell_args: " con up id eno16777736 "
+#      #vm_shell_args: " dev disconnect eno16777736 "
+#      vm_shell_args: " general hostname {{ item.key }}.internal.croftvillas.com "
+#    when: item.value.power_state == "poweredOn"
+#    with_dict: "{{ vmware.virtual_machines }}"
 
