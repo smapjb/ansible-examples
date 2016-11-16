@@ -1,0 +1,13 @@
+---
+- name: This is a playbook to test out the ping issue
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: wait for DNS registration, signifying domain join
+      shell: "/bin/ping -c 1 master.internal.croftvillas.com"
+      register: result
+      changed_when: false
+      until: result.rc == 0
+      retries: 3
+      delay: 2
