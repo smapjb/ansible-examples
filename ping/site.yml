@@ -2,6 +2,7 @@
 - name: This is a playbook to test out the ping issue
   hosts: localhost
   gather_facts: false
+  connection: local
 
   tasks:
     - name: wait for DNS registration, signifying domain join
