@@ -55,7 +55,8 @@
 - name: Do something with those instances
   hosts: web:&production
   connection: winrm
-  
+#  gather_facts: False
+ 
   vars_files:
     - secret.yml
 
