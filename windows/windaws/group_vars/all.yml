@@ -5,3 +5,14 @@ ec2_security_group: insecure_all
 ec2_instance_count: 3
 
 tower_user_name: pcorneli
+
+ansible_user: Administrator
+ansible_password: "{{ win_initial_password }}"
+ansible_port: 5986
+ansible_connection: winrm
+# The following is necessary for Python 2.7.9+ when using default WinRM self-signed certificates:
+ansible_winrm_server_cert_validation: ignore
+# Adding these settings for the 500 server error - https://github.com/ansible/ansible/issues/16873
+ansible_winrm_operation_timeout_sec: 60
+ansible_winrm_read_timeout_sec: 70
+
