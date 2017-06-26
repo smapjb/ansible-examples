@@ -1,0 +1,19 @@
+---
+- name: Do something with those instances
+  hosts: all
+  connection: winrm
+#  gather_facts: False
+ 
+  vars_files:
+    - secret.yml
+
+  tasks:
+
+  - name: Enable IIS on the servers
+    win_feature:
+      name: "Web-Server"
+      state: present
+      restart: yes
+      include_sub_features: yes
+      include_management_tools: yes
+
