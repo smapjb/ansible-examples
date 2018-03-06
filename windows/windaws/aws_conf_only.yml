@@ -13,7 +13,11 @@
     win_feature:
       name: "Web-Server"
       state: present
-      restart: yes
       include_sub_features: yes
       include_management_tools: yes
+    register: iis_install
+
+  - name: Reboot server if required
+    win_reboot:
+    when: iis_install.reboot_required is defined and iis_install.reboot_required == True
 
