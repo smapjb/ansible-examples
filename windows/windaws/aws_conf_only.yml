@@ -15,7 +15,6 @@
       state: present
       include_sub_features: yes
       include_management_tools: yes
-      restart: yes
     register: iis_install
 
   - name: Reboot server if required
