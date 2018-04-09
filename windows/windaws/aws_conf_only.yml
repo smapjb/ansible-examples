@@ -15,35 +15,37 @@
         name: nginx
         state: present
         version: "{{ nginx_version }}"
+
     - name: install nssm
       win_chocolatey:
         name: nssm
         state: present
-    - name: copy nginx conf file
-      win_template: 
-        src: nginx.conf.j2
-        dest: "C:\ProgramData\chocolatey\lib\nginx\tools\nginx-{{ nginx_version }}\conf\nginx.conf"
-    - name: install nginx as service
-      win_nssm:
-        name: nginx
-        application: "C:\ProgramData\chocolatey\lib\nginx\tools\nginx-{{ nginx_version }}\nginx.exe"
-        app_parameters_free_form: "-c C:\ProgramData\chocolatey\lib\nginx\tools\nginx-{{ nginx_version }}\conf\nginx.conf -p C:\ProgramData\chocolatey\lib\nginx\tools\nginx-{{ nginx_version }}"
-        stdout_file: C:\nginx_out.txt
-        stderr_file: C:\nginx_error.txt
-        start_mode: auto
-        state: started
-        notify:
-          - start nginx
 
-#  - name: New Enable IIS on the servers
-#    win_feature:
-#      name: "Web-Server"
-#      state: present
-#      include_sub_features: yes
-#      include_management_tools: yes
-#    register: iis_install
-#
-#  - name: Reboot server if required
-#    win_reboot:
-#    when: iis_install.reboot_required is defined and iis_install.reboot_required == True
+   - name: install nginx as service
+     win_nssm:
+       name: nginx
+       application: 'C:\ProgramData\chocolatey\lib\nginx\tools\nginx-{{ nginx_version }}\nginx.exe'
+       app_parameters_free_form: '-c C:\ProgramData\chocolatey\lib\nginx\tools\nginx-{{ nginx_version }}\conf\nginx.conf -p C:\ProgramData\chocolatey\lib\nginx\tools\nginx-{{ nginx_version }}'
+       stdout_file: C:\nginx_out.txt
+       stderr_file: C:\nginx_error.txt
+       start_mode: auto
+       state: started
+     notify:
+       - start nginx
 
+   - name: Firewall rule to allow HTTP on TCP port 80
+     win_firewall_rule:
+       name: HTTP
+       localport: 80
+       action: allow
+       direction: in
+       protocol: tcp
+       state: present
+       enabled: yes
+
+
+  handlers:
+   - name: start nginx
+     win_service:
+       name: nginx
+       state: started
