@@ -1,5 +1,8 @@
 ---
 # Variables here are applicable to all host groups
+#
+ansible_ssh_user: centos
+ansible_become: yes
 
 httpd_port: 80
 ntpserver: 192.168.1.2
@@ -8,9 +11,9 @@ ntpserver: 192.168.1.2
 ec2_region: eu-west-1
 ec2_zone:
 ec2_image: ami-2b7f4c5c
-ec2_instance_type: m1.small
+ec2_instance_type: t2.micro
 ec2_keypair: ansible
-ec2_security_group: default
+ec2_security_group: insecure_all
 ec2_instance_count: 3
 ec2_tag: demo_phillyair
 ec2_tag_name_prefix: pcorneli
