@@ -8,6 +8,13 @@
       - libsemanage-python
     state: present
 
+- name: Update the curl and nss packages to latest
+  yum:
+    name:
+      - curl
+      - nss
+    state: latest
+
 - name: Create the repository for EPEL
   copy:
     src: epel.repo
