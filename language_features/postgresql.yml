@@ -7,7 +7,7 @@
 #
 ---
 - hosts: webservers
-  sudo: yes
+  become: yes
   gather_facts: no
 
   tasks:
@@ -21,8 +21,8 @@
         - python-psycopg2
 
 - hosts: webservers
-  sudo: yes
-  sudo_user: postgres
+  become: yes
+  become_user: postgres
   gather_facts: no
 
   vars:
@@ -39,3 +39,7 @@
 
   - name: ensure user does not have unnecessary privilege
     postgresql_user: name={{dbuser}} role_attr_flags=NOSUPERUSER,NOCREATEDB
+  
+  - name: ensure no other user can access the database
+    postgresql_privs: db={{dbname}} role=PUBLIC type=database priv=ALL state=absent
+
