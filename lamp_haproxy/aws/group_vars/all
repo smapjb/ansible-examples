@@ -1,9 +1,6 @@
 ---
 # Variables here are applicable to all host groups
 #
-ansible_ssh_user: centos
-ansible_become: yes
-
 httpd_port: 80
 ntpserver: 192.168.1.2
 

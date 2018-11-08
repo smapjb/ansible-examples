@@ -36,6 +36,12 @@
       - nagios-plugins-disk
     state: present
 
+- name: Configure nrpe file
+  template:
+    src: nrpe.cfg.j2
+    dest: /etc/nagios/nrpe.cfg
+  notify: restart nrpe
+
 - name: Install ntp
   yum:
     name: ntp

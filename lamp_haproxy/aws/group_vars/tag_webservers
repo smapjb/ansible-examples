@@ -1,5 +1,7 @@
 ---
 # Variables for the web server configuration
+ansible_ssh_user: centos
+ansible_become: yes
 
 # Ethernet interface on which the web server should listen.
 # Defaults to the first interface. Change this to:

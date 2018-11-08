@@ -1,5 +1,7 @@
 ---
 # Variables for the HAproxy configuration
+ansible_ssh_user: centos
+ansible_become: yes
 
 # HAProxy supports "http" and "tcp". For SSL, SMTP, etc, use "tcp".
 mode: http

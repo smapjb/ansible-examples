@@ -47,5 +47,11 @@
     - lbservers.cfg
   notify: restart nagios
 
+# Temporary workaround, didnt have time to create the correct policy
+- name: Set selinux to permissive so that nrpe checks can run
+  selinux:
+    policy: targeted
+    state: permissive
+
 - name: start nagios
   service: name=nagios state=started enabled=yes
