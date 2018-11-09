@@ -4,6 +4,8 @@
 httpd_port: 80
 ntpserver: 192.168.1.2
 
+webapp_version: version_2
+
 # Number of web servers in the cluster
 ec2_instance_count: 3
 
