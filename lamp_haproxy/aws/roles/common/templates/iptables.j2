@@ -15,6 +15,7 @@
 
 {% if (inventory_hostname in groups.tag_lbservers) %}
 -A INPUT -p tcp  --dport {{ listenport }} -j  ACCEPT
+-A INPUT -p tcp  --dport {{ statsport }} -j  ACCEPT
 {% endif %}
 
 {% for host in groups.tag_monitoring %}

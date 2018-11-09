@@ -29,6 +29,12 @@ defaults
     timeout check           10s
     maxconn                 3000
 
+listen stats
+    bind *:{{ statsport }}
+    mode http
+    stats enable
+    stats uri /
+
 backend app
     {% for host in groups.tag_lbservers %}
     	listen {{ daemonname }} 0.0.0.0:{{ listenport }}
