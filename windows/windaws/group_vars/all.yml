@@ -1,8 +1,8 @@
 ---
 ec2_instance_type: m1.small
 ec2_region: eu-west-1
-#ec2_keypair: pcorneli
+ec2_keypair: pcorneli
 ec2_security_group: default
-ec2_instance_count: 2
+ec2_instance_count: 3
 
 tower_user_name: pcorneli
