@@ -4,18 +4,16 @@
 httpd_port: 80
 ntpserver: 192.168.1.2
 
+# Number of web servers in the cluster
+ec2_instance_count: 3
+
 # AWS specific variables
 ec2_region: eu-west-1
-ec2_zone:
 ec2_image: ami-2b7f4c5c
 ec2_instance_type: t2.micro
 ec2_keypair: ansible
 ec2_security_group: insecure_all
-ec2_instance_count: 3
-ec2_tag: demo_phillyair
-ec2_tag_name_prefix: pcorneli
-ec2_hosts: all
 wait_for_port: 22
 
 # This user name will be set by Tower, when run through Tower
-tower_user_name: phillyair
+tower_user_name: pcorneli
