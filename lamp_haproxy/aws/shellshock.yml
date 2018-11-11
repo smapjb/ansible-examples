@@ -1,0 +1,19 @@
+---
+- name: Playbook to test and remediate shellshock
+  hosts: all
+  
+  tasks:
+  - name: Update bash
+    yum:
+      name: bash
+      state: latest
+      update_cache: yes
+
+  - name: Test vulnerability 
+    shell: 'env x=''(){ :;}; echo vulnerable'' bash -c "echo this is a test"'
+    args:
+     executable: /bin/bash
+    register: vulntest
+    failed_when: vulntest.stdout is search('vulnerable')
+    ignore_errors: yes
+    changed_when: no
