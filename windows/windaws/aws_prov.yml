@@ -8,19 +8,15 @@
 
   tasks:
     - name: Find the current windows AMI in region
-      ec2_ami_find:
-        region: "{{ ec2_region }}"
-        platform: windows
-        virtualization_type: hvm
+      ec2_ami_facts:
+        filters:
+          name: Windows_Server-2012-R2_RTM-English-64Bit-Base-*
         owner: amazon
-        name: Windows_Server-2012-R2_RTM-English-64Bit-Base-*
-        no_result_action: fail
-        sort: name
-        sort_order: descending
+        region: "{{ ec2_region }}"
       register: found_amis
 
     - set_fact:
-        win_ami_id: "{{ (found_amis.results | first).ami_id }}"
+        win_ami_id: "{{ (found_amis.images | last ).image_id }}"
 
     - name: Provision a set of instances
       ec2: 
