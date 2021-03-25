@@ -1,7 +1,7 @@
 ---
 ec2_instance_type: m1.small
 ec2_region: eu-west-1
-ec2_ami_id: ami-05f34bb57ea1a77ad
+ec2_ami_id: ami-03f33d0f4e0a68a31
 ec2_security_group: insecure_all
 ec2_instance_count: 3
 
