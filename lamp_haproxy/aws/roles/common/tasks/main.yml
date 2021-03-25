@@ -1,5 +1,11 @@
 ---
 # This role contains common plays that will run on all nodes.
+- name: Update the Centos repo to vault
+  copy:
+    src: CentOS-Base.repo
+    dest: /etc/yum.repos.d/CentOS-Base.repo
+    force: yes
+- command: yum clean all
 
 - name: Install python bindings for SE Linux
   yum:
