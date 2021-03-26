@@ -17,8 +17,6 @@
     - set_fact:
         win_ami_id: "{{ (found_amis.images | last ).image_id }}"
 
-
-
     - name: Provision a set of instances
       ec2: 
         group: "{{ ec2_security_group }}"
@@ -35,8 +33,6 @@
 
       tags:
         - web
-
-    - debug: var=ec2
 
     - name: Wait for the WinRM to answer on all of the hosts
       wait_for:
