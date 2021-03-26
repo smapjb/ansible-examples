@@ -28,8 +28,6 @@
         app_parameters_free_form: '-c C:\ProgramData\chocolatey\lib\nginx\tools\nginx-{{ nginx_version }}\conf\nginx.conf -p C:\ProgramData\chocolatey\lib\nginx\tools\nginx-{{ nginx_version }}'
         stdout_file: C:\nginx_out.txt
         stderr_file: C:\nginx_error.txt
-        start_mode: auto
-        state: started
       notify:
         - start nginx
 
