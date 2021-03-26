@@ -11,7 +11,8 @@
       ec2_ami_info:
         region: "{{ ec2_region }}"
         filters:
-          name: Windows_Server-2019-English-Core-Base*
+#          name: Windows_Server-2019-English-Core-Base*
+          name: Windows_Server-2012-R2_RTM-English-64Bit-Base-*
       register: found_amis
 
     - set_fact:
